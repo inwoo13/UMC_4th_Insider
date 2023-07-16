@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="white1">#FFFFFF</color>
+
+    <!--
+    <color name="loadingImgColor">#2E6A26</color>
+    <color name="loadingTextColor">#F6C406</color>
+
+    <color name="loginTextColorGray">#ABAFB6</color>
+    <color name="googleLoginBtn">#EA4335</color>
+    <color name="facebookLoginBtn">#4267B2</color>
+    -->
+
+    <color name="main">#46B451</color>
+    <color name="lightMain">#C8F3CC</color>
+    <color name="point">#F6C406</color>
+    <color name="blue">#1A73E9</color>
+    <color name="red">#EB5757</color>
+    <color name="green">#00C342</color>
+    <color name="gray30">#BBBBBB</color>
+
+    <color name="statusBarColor">#999999</color>
+    <color name="googleLoginColor">#EA4335</color>
+    <color name="facebookLoginColor">#4267B2</color>
+    <color name="loginSingUpTextColor">#8F959E</color>1
+    <color name="editTextTint">#E7E8EA</color>
+</resources>

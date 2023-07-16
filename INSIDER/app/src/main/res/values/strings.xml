@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">INSIDER</string>
+    <string name="app_name_1">Insider</string>
+    <string name="app_purpose">나누는 식재료, 줄어드는 부담</string>
+
+    <!-- Login-->
+    <string name="userId">사용자 ID</string>
+    <string name="userPassword">비밀번호</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="logInWith">Log in With</string>
+    <string name="logIn">로그인</string>
+    <string name="singUp">회원가입</string>
+
+    <!--SingUp-->
+    <string name="userIdSignUp">사용자 ID()</string>
+    <string name="userNicknameSignUp">닉네임()</string>
+    <string name="userPasswordSignUp">비밀번호()</string>
+    <string name="passwordCheckSignUp">비밀번호 확인(위의 비밀번호와 일치)</string>
+    <string name="userEmailSignUp">이메일 주소</string>
+    <string name="address">주소</string>
+    <string name="addressFind">우편번호 찾기</string>
+
+
+    <string name="emailHint">example@insider.com</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- home, search -->
+    <string name="searchHint">원하는 상품을 검색하세요!</string>
+    <string name="favoriteList">찜목록</string>
+    <string name="ProductDetail">상품 상세 정보</string>
+    <string name="realTimeSearchTermsRanking">실시간 검색어 순위</string>
+    <string name="recentSearches">최근 검색어</string>
+    <string name="removeAllText"><u>모두 지우기</u></string>
+
+</resources>
