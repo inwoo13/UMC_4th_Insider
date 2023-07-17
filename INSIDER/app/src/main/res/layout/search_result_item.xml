@@ -35,17 +35,40 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <TextView
-                    android:id="@+id/itemInfo"
+                    android:id="@+id/itemName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/roboto"
-                    android:text="양파 (200g)"
+                    android:text="양파"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/itemWeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/itemName"
+                    android:text="(200g)"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:layout_marginStart="10dp"/>
+                <TextView
+                    android:id="@+id/itemPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/itemWeight"
+                    android:text="3,000원"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:layout_marginStart="10dp"/>
+
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -53,9 +76,9 @@
                     android:layout_marginEnd="10dp"
                     android:gravity="end"
                     android:src="@drawable/favorite_on"
-                    app:layout_constraintBottom_toBottomOf="@id/itemInfo"
+                    app:layout_constraintBottom_toBottomOf="@id/itemName"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/itemInfo" />
+                    app:layout_constraintTop_toTopOf="@id/itemName" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

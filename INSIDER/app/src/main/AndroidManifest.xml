@@ -16,7 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.INSIDER"
         android:usesCleartextTraffic="true"
-        android:windowSoftInputMode="adjustResize|adjustPan"
         tools:targetApi="31">
         <activity
             android:name=".FavoritesActivity"

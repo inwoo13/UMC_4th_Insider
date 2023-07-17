@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import android.widget.SearchView
@@ -32,12 +33,15 @@ class SearchFragment : Fragment(),SearchesItemClickListener {
 
     override fun onResume() {
         super.onResume()
-        binding.searchView.isFocusable = true
-        binding.searchView.isIconified = false
-        binding.searchView.requestFocusFromTouch()
+        binding.root.post {
+            binding.searchView.isFocusable = true
+            binding.searchView.isIconified = false
+            binding.searchView.requestFocusFromTouch()
 
-        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+            val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
+            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+        }
     }
 
     override fun onCreateView(
@@ -131,11 +135,6 @@ class SearchFragment : Fragment(),SearchesItemClickListener {
     }
 
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
     override fun onClickSearch(searchTerm: String) {
         searchKeyword(searchTerm)
     }
@@ -162,6 +161,22 @@ class SearchFragment : Fragment(),SearchesItemClickListener {
     }
 
 
+    override fun onPause() {
+        super.onPause()
+
+        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(binding.searchView.windowToken, 0)
+
+        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+
+
 }
 
 class RecentSearchesAdapterDecoration : RecyclerView.ItemDecoration(){
@@ -175,8 +190,6 @@ class RecentSearchesAdapterDecoration : RecyclerView.ItemDecoration(){
         super.getItemOffsets(outRect, view, parent, state)
 
         val position = parent.getChildAdapterPosition(view)
-        val count = state.itemCount
-        val offset = 13
         if(position != 4) outRect.right = 20
     }
 }

@@ -7,6 +7,7 @@
 
     <style name="Base.Theme.MainActivity" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:statusBarColor">@color/statusBarColor</item>
+        <item name="android:windowSoftInputMode">adjustNothing</item>
         <item name="colorPrimary">@color/main</item>
     </style>
 
