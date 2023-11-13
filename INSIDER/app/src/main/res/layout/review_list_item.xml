@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/round_16_rectangle"
+        android:elevation="5dp"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:id="@+id/reviewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="13dp"
+            android:fontFamily="@font/roboto"
+            android:text="##님이 남긴 평점과 후기"
+            android:textColor="@color/main"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/reviewScore"
+            android:layout_width="53dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/round_rectangle_pointcolor_full"
+            android:fontFamily="@font/roboto"
+            android:paddingHorizontal="5dp"
+            android:text="100점"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingTop="3dp"
+            app:layout_constraintStart_toStartOf="@id/reviewTitle"
+            app:layout_constraintTop_toBottomOf="@id/reviewTitle" />
+
+        <TextView
+            android:id="@+id/reviewDetail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="15dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="친절하고 좋았습니다!"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/reviewScore"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/reviewScore"
+            app:layout_constraintTop_toTopOf="@id/reviewScore" />
+
+        <TextView
+            android:id="@+id/reviewDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="10dp"
+            android:text="2023.07.25"
+            android:textColor="@color/gray30"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

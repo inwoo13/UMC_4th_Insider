@@ -2,8 +2,8 @@ package com.umc.insider.auth.signUp
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.map
 
 class SignUpViewModel : ViewModel() {
 
@@ -22,7 +22,13 @@ class SignUpViewModel : ViewModel() {
     private val _userEmail = MutableLiveData("")
     val userEmail : LiveData<String> = _userEmail
 
-    val idState: LiveData<EditState> = Transformations.map(_userId) { id ->
+    private val _registerNum = MutableLiveData("")
+    val registerNum : LiveData<String> = _registerNum
+
+    private val _registerNumCheckResult = MutableLiveData(false)
+    private val registerNumCheckResult : LiveData<Boolean> = _registerNumCheckResult
+
+    val idState: LiveData<EditState> = _userId.map { id ->
         when {
             id.isNullOrBlank() -> EditState.EMPTY
             REGEX_ID.toRegex().matches(id) -> EditState.CHECK
@@ -30,7 +36,7 @@ class SignUpViewModel : ViewModel() {
         }
     }
 
-    val nicknameState : LiveData<EditState> = Transformations.map(_userNickname) { nickname ->
+    val nicknameState : LiveData<EditState> = _userNickname.map { nickname ->
         when{
             nickname.isNullOrBlank() -> EditState.EMPTY
             REGEX_NICKNAME.toRegex().matches(nickname) -> EditState.CHECK
@@ -38,16 +44,11 @@ class SignUpViewModel : ViewModel() {
         }
     }
 
-    val securityState: LiveData<SecurityState> = Transformations.map(_userPWD) { password ->
-        when {
-            password.length > 7 -> SecurityState.SAFE
-            password.length > 4 -> SecurityState.NORMAL
-            password.isNotEmpty() -> SecurityState.DANGER
-            else -> SecurityState.EMPTY
-        }
+    val securityState: LiveData<SecurityState> = _userPWD.map { password ->
+        checkPWD(password)
     }
 
-    val checkState : LiveData<EditState> = Transformations.map(_checkPWD) { checkPassword ->
+    val checkState : LiveData<EditState> = _checkPWD.map { checkPassword ->
         when {
             checkPassword.isNullOrBlank() -> EditState.EMPTY
             checkPassword == _userPWD.value -> EditState.CHECK
@@ -55,12 +56,38 @@ class SignUpViewModel : ViewModel() {
         }
     }
 
-    val emailState: LiveData<EditState> = Transformations.map(_userEmail) { email ->
+    val emailState: LiveData<EditState> = _userEmail.map { email ->
         when {
             email.isNullOrBlank() -> EditState.EMPTY
             REGEX_EMAIL.toRegex().matches(email) -> EditState.CHECK
             else -> EditState.CLOSE
         }
+    }
+
+    val registerNumState: LiveData<EditState> = _registerNum.map { registerNum ->
+        when{
+            registerNum.isNullOrBlank() -> EditState.EMPTY
+            REGEX_REGISTER.toRegex().matches(registerNum) -> EditState.CHECK
+            else -> EditState.CLOSE
+        }
+    }
+
+    private fun checkPWD(password : String) : SecurityState {
+
+        if (password.isNullOrBlank()) return SecurityState.EMPTY
+
+        val hasSpecialChars = Regex(REGEX_SPECIALCHAR).findAll(password).count() >= 1
+        val hasUppercase = password.any { it.isUpperCase() }
+        val hasConsecutiveChars = (0 until password.length - 2).any { password[it + 2].toInt() == password[it + 1].toInt() + 1 && password[it + 1].toInt() == password[it].toInt() + 1 }
+
+        val conditionCount = listOf(hasSpecialChars, hasUppercase, !hasConsecutiveChars).count { it }
+
+        return when (conditionCount) {
+            3 -> SecurityState.SAFE
+            2 -> SecurityState.NORMAL
+            else -> SecurityState.DANGER
+        }
+
     }
 
     fun setUserId(id : String){
@@ -84,17 +111,26 @@ class SignUpViewModel : ViewModel() {
         _userEmail.value = email
     }
 
-    companion object{
-        //영문자, 숫자, 하이픈(-), 언더스코어(_) 만 포함
-        //아이디의 길이는 5자 이상 20자 이하
-        //아이디는 숫자로 시작할 수 없음
-        private const val REGEX_ID = "^[a-zA-Z_\\-][a-zA-Z0-9_\\-]{4,19}\$"
+    fun setResgisterNum(registerNum : String){
+        _registerNum.value = registerNum
+    }
 
-        //닉네임은 한글, 영문자, 숫자, 언더스코어(_)만 포함
-        //닉네임의 길이는 2자 이상 10자 이하
-        private const val REGEX_NICKNAME = "^[가-힣a-zA-Z0-9_]{2,10}\$"
+    companion object{
+        //최소 6자 이상, 10자 이하
+        //알파벳 소문자와 대문자 포함
+        //특수 문자 사용 불가
+        private const val REGEX_ID = "^(?=.*[a-zA-Z])[a-zA-Z0-9]{6,10}\$"
+
+        //최소 2자, 최대 10자
+        //알파벳 대소문자, 한글 허용
+        //특수문자 밑줄(_)과 하이폰(-) 허용
+        private const val REGEX_NICKNAME = "^[a-zA-Z가-힣_-]{2,10}\$"
+
+        private const val REGEX_SPECIALCHAR = "[!@#\$%^&*()-=_+]"
 
         private const val REGEX_EMAIL = "^[a-zA-Z0-9+-\\_.]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+\$"
+
+        private const val REGEX_REGISTER = "^[0-9]{10}\$"
     }
 }
 

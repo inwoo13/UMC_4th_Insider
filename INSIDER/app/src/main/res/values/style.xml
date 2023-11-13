@@ -1,4 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+
+    <!--카테고리 스피너 커스텀-->
+    <style name = "SpinnerDivideStyle">
+        <item name="android:divider">@color/gray30</item>
+        <item name="android:dividerHeight">2dp</item>
+    </style>
+    <style name = "SpinnerTheme" parent="Theme.AppCompat">
+        <item name = "android:dropDownListViewStyle">@style/SpinnerDivideStyle</item>
+    </style>
+
+    <style name="SpinnerTransparent" parent="Widget.AppCompat.Spinner">
+        <item name="android:popupBackground">@drawable/spinner_transparent_background</item>
+    </style>
+
+    <!--font style-->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:textViewStyle">@style/customTextViewFontStyle</item>
+        <item name="android:buttonStyle">@style/customButtonFontStyle</item>
+        <item name="android:editTextStyle">@style/customEditTextFontStyle</item>
+        <item name="android:radioButtonStyle">@style/customRadioButtonFontStyle</item>
+        <item name="android:checkboxStyle">@style/customCheckboxFontStyle</item>
+    </style>
+
 
 </resources>

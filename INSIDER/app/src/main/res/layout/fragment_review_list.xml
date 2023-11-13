@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragments.ReviewListFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/toolbarLayout"
+                android:layout_width="0dp"
+                android:layout_height="43dp"
+                android:background="@drawable/bottom_round_rectangle"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/logo"
+                    android:layout_width="31dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:srcCompat="@drawable/loading_logo" />
+
+                <ImageView
+                    android:layout_width="74.8dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:src="@drawable/app_name_english_yellow" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/myReviewTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/roboto"
+                android:text="\@@님의 후기 n개"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbarLayout" />
+            <View
+                android:id="@+id/myScore"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/round_rectangle_maincolor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/myReviewTextView"/>
+            <TextView
+                android:id="@+id/myScoreTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="80"
+                android:textColor="@color/main"
+                android:textSize="40sp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintEnd_toEndOf="@id/myScore"
+                app:layout_constraintStart_toStartOf="@id/myScore"
+                app:layout_constraintTop_toTopOf="@id/myScore" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/myScore"
+                android:textStyle="bold"
+                android:textColor="@color/main"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@id/myScore"
+                app:layout_constraintStart_toStartOf="@id/myScore"
+                app:layout_constraintTop_toBottomOf="@id/myScoreTextView" />
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/myScore">
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/myReviewListRV"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="20dp"
+                        tools:listitem="@layout/review_list_item"
+                        tools:itemCount="10"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.core.widget.NestedScrollView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </FrameLayout>
+</layout>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/profileImg"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:background="@drawable/gray30_round_18_rectangle"
+        android:scaleType="fitXY"
+        android:padding="1dp"
+        app:srcCompat="@drawable/mypage"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"/>
+
+
+    <TextView
+        android:id="@+id/interlocutor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="11dp"
+        android:fontFamily="@font/roboto"
+        android:text="###"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/profileImg"
+        app:layout_constraintTop_toTopOf="@id/profileImg" />
+
+    <TextView
+        android:id="@+id/recentMessageTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:fontFamily="@font/roboto"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="안녕하세요. 교환 가능 하실까요?"
+        android:layout_marginEnd="5dp"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/lastTime"
+        app:layout_constraintBottom_toBottomOf="@id/profileImg"
+        app:layout_constraintStart_toStartOf="@id/interlocutor" />
+
+    <TextView
+        android:id="@+id/lastTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1시간 전"
+        android:textSize="10sp"
+        android:layout_marginEnd="15dp"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/gray30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/recentMessageTextView"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profileImg"
+        android:background="@color/editTextTint"
+        android:layout_marginTop="10dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

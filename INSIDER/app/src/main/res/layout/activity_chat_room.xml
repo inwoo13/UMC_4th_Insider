@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ChatRoomActivity">
+
+        <LinearLayout
+            android:id="@+id/toolbarLayout"
+            android:layout_width="0dp"
+            android:layout_height="43dp"
+            android:background="@drawable/bottom_round_rectangle"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="31dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:srcCompat="@drawable/loading_logo" />
+
+            <ImageView
+                android:layout_width="74.8dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:src="@drawable/app_name_english_yellow" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="end"
+                android:paddingRight="10dp">
+
+                <ImageView
+                    android:id="@+id/menuBtn"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/baseline_menu_24"
+                    android:layout_gravity="center_vertical"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/interlocutorLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/chatRV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
+            android:paddingHorizontal="15dp">
+
+            <ImageView
+                android:id="@+id/goodsImg"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginVertical="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/onion"
+                android:scaleType="fitXY"/>
+
+            <TextView
+                android:id="@+id/goodsName"
+                android:layout_width="wrap_content"
+                android:textSize="14sp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/goodsImg"
+                app:layout_constraintTop_toTopOf="@id/goodsImg"
+                android:text="상품의 이름"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/roboto"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/goodsPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/goodsImg"
+                app:layout_constraintBottom_toBottomOf="@id/goodsImg"
+                android:text="상품의 가격"
+                android:textSize="14sp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/roboto"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/interlocutor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toStartOf="@id/interlocutorRating"
+                app:layout_constraintBottom_toBottomOf="@id/goodsPrice"
+                android:fontFamily="@font/roboto"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_marginEnd="5dp"
+                android:text="유저"/>
+
+            <TextView
+                android:id="@+id/interlocutorRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/goodsPrice"
+                app:layout_constraintTop_toTopOf="@id/goodsPrice"
+                android:fontFamily="@font/roboto"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="@color/point"
+                android:text="80점"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chatRV"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            android:background="@color/lightGray"
+            app:layout_constraintBottom_toTopOf="@id/inputTextLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:paddingHorizontal="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/interlocutorLayout"
+            tools:itemCount="5"
+            tools:listitem="@layout/chat_room_item" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/inputTextLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chatRV">
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/editTextTint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/chatEditTextView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="15dp"
+                android:paddingStart="10dp"
+                android:background="@drawable/gray30_round_10_rectangle"
+                app:layout_constraintBottom_toBottomOf="@id/sendBtn"
+                app:layout_constraintEnd_toStartOf="@id/sendBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/sendBtn" />
+
+            <Button
+                android:id="@+id/sendBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:layout_marginEnd="15dp"
+                android:backgroundTint="@color/main"
+                android:fontFamily="@font/roboto"
+                android:paddingHorizontal="20dp"
+                android:text="전송"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

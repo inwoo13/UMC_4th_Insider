@@ -3,17 +3,16 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'com.google.gms.google-services'
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 android {
     namespace 'com.umc.insider'
     compileSdk 33
 
-    Properties properties = new Properties()
-    properties.load(project.rootProject.file('local.properties').newDataInputStream())
-    def fb_app_id = properties.getProperty('facebook.app.id')
-    def fb_protocol_scheme = properties.getProperty("fb.login.protocol.scheme")
 
     defaultConfig {
         applicationId "com.umc.insider"
@@ -22,9 +21,6 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        manifestPlaceholders = [facebookAppID:fb_app_id,facebookScheme:fb_protocol_scheme]
     }
 
     buildTypes {
@@ -34,7 +30,7 @@ android {
         }
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = '17'
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -42,14 +38,25 @@ android {
     }
     buildFeatures {
         dataBinding true
+        viewBinding true
     }
-    buildFeatures {
-        buildConfig = true
+    viewBinding {
+        enabled = true
     }
+
 
 }
 
 dependencies {
+    implementation 'com.kakao.sdk:v2-user:2.6.0'
+    implementation 'com.naver.maps:map-sdk:3.17.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+
+    implementation 'com.github.bumptech.glide:glide:4.14.1'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.6.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.14.1'
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -69,4 +76,15 @@ dependencies {
     implementation 'com.facebook.android:facebook-login:11.3.0'
 
     implementation 'com.google.code.gson:gson:2.9.0'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    // Kakao Login
+    implementation 'com.kakao.sdk:v2-user:2.10.0'
+
+    // circleImage
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    implementation 'jp.wasabeef:glide-transformations:4.3.0'
 }

@@ -39,7 +39,7 @@
             android:fontFamily="@font/roboto"
             android:layout_marginTop="15dp"
             android:layout_marginStart="40dp"
-            android:textSize="30sp"
+            android:textSize="24sp"
             android:textStyle="bold"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

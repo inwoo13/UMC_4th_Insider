@@ -23,8 +23,11 @@
         <item name="colorControlActivated">@color/black</item> <!-- 색상 설정 -->
     </style>
 
-    <style name="Theme.MainActivity" parent="Base.Theme.MainActivity"/>
-    <style name="Theme.SignUp" parent="Base.Theme.SignUpActivity"/>
-    <style name="Theme.INSIDER" parent="Base.Theme.INSIDER"/>
-    <style name="Theme.Loading" parent="Base.Theme.LoadingActivity"/>
+    <style name="Theme.MainActivity" parent="Base.Theme.MainActivity" />
+
+    <style name="Theme.SignUp" parent="Base.Theme.SignUpActivity" />
+
+    <style name="Theme.INSIDER" parent="Base.Theme.INSIDER" />
+
+    <style name="Theme.Loading" parent="Base.Theme.LoadingActivity" />
 </resources>

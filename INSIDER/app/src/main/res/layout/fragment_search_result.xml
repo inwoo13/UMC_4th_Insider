@@ -19,22 +19,25 @@
             <LinearLayout
                 android:id="@+id/barLayout"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="43dp"
+                android:paddingVertical="2.5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:background="@drawable/bottom_round_rectangle">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="20dp"
+                    android:id="@+id/searchBtn"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"/>
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_gravity="right"
+                    app:srcCompat="@drawable/search_white"/>
 
             </LinearLayout>
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -53,19 +56,70 @@
                     android:text='"양파" 검색 결과'
                     android:fontFamily="@font/roboto"
                     android:layout_marginTop="15dp"
-                    android:textSize="30sp"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
                     android:textStyle="bold"/>
+
+                <!--일반, 교환 선택-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/selectPurchase"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/white_eight_round_rectangle"
+                    android:elevation="8dp"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/searchText">
+
+                    <TextView
+                        android:id="@+id/generalPurchase"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:paddingVertical="10dp"
+                        android:text="일반 구매"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="@color/white"
+                        android:background="@drawable/green_left_round"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.5"/>
+
+                    <TextView
+                        android:id="@+id/Exchange"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:paddingVertical="10dp"
+                        android:text="교환하기"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="@color/main"
+                        android:background="@drawable/white_right_round"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/generalPurchase"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.5"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/searchRV"
                     android:layout_marginTop="10dp"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:background="@null"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/searchText"
+                    app:layout_constraintTop_toBottomOf="@id/selectPurchase"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    tools:listitem="@layout/srarch_item"/>
+                    tools:listitem="@layout/goods_long_item"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

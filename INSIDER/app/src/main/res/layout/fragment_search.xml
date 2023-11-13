@@ -27,34 +27,21 @@
 
                 <ImageView
                     android:id="@+id/appName"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="124dp"
+                    android:layout_height="29dp"
+                    android:layout_marginTop="12dp"
                     android:fontFamily="@font/roboto"
                     android:gravity="bottom"
                     android:src="@drawable/app_name_english"
                     android:textColor="@color/main"
-                    app:layout_constraintEnd_toStartOf="@+id/text"
-                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:fontFamily="@font/roboto"
-                    android:text="@string/app_purpose"
-                    android:textColor="@color/main"
-                    app:layout_constraintBottom_toBottomOf="@id/appName"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/appName" />
 
                 <androidx.appcompat.widget.SearchView
                     android:id="@+id/searchView"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/search_background"
                     app:defaultQueryHint="@string/searchHint"
@@ -68,7 +55,7 @@
                 android:id="@+id/realTimeSearchTermsRankingLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/searchViewLayout">

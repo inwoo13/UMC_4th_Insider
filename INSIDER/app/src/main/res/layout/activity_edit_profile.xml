@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white">
+
+  <data>
+
+  </data>
+
+  <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      tools:context=".fragments.MyPageFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+      <LinearLayout
+          android:id="@+id/toolbarLayout"
+          android:layout_width="0dp"
+          android:layout_height="43dp"
+          android:background="@drawable/bottom_round_rectangle"
+          android:orientation="horizontal"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="31dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:srcCompat="@drawable/loading_logo" />
+
+        <ImageView
+            android:layout_width="74.8dp"
+            android:layout_height="18dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:src="@drawable/app_name_english_yellow" />
+
+      </LinearLayout>
+
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/editInfoLayout"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/toolbarLayout">
+
+        <TextView
+            android:id="@+id/editProfileTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:text="@string/editprofile"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/profileLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editProfileTextView">
+
+          <FrameLayout
+              android:id="@+id/profileImgLayout"
+              android:layout_width="100dp"
+              android:layout_height="100dp"
+              android:background="@drawable/gray30_round_18_rectangle"
+              android:elevation="3dp"
+              android:gravity="center"
+              android:layout_marginTop="10dp"
+              android:layout_marginStart="15dp"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/profileImg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/mypage" />
+
+          </FrameLayout>
+
+          <TextView
+              android:id="@+id/bring_image"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="3dp"
+              android:text="@string/bringImage"
+              android:textColor="@color/gray30"
+              android:textSize="15sp"
+              app:layout_constraintEnd_toEndOf="@+id/profileImgLayout"
+              app:layout_constraintStart_toStartOf="@+id/profileImgLayout"
+              app:layout_constraintTop_toBottomOf="@id/profileImgLayout" />
+
+          <androidx.constraintlayout.widget.ConstraintLayout
+              android:id="@+id/nicknameLayout"
+              android:background="@drawable/round_gray_6_rectangle"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="15dp"
+              android:layout_marginTop="10dp"
+              android:layout_marginEnd="15dp"
+              android:padding="2dp"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toEndOf="@id/profileImgLayout"
+              app:layout_constraintTop_toTopOf="@id/profileImgLayout">
+
+            <EditText
+                android:id="@+id/nicknameTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/roboto"
+                android:text="\@@"
+                android:hint="닉네임을 입력해주세요."
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/sirTV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/sirTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="3dp"
+                android:text="님"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- android:layout_marginEnd="4dp"-->
+
+          </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+          <TextView
+              android:id="@+id/idTextView"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="16dp"
+              android:text="\@5sy11_oxo"
+              android:textColor="@color/gray30"
+              android:textSize="15sp"
+              android:textStyle="bold"
+              app:layout_constraintEnd_toEndOf="@+id/nicknameLayout"
+              app:layout_constraintTop_toBottomOf="@id/nicknameLayout" />
+
+          <View
+              android:layout_width="0dp"
+              android:layout_height="1dp"
+              android:layout_marginTop="10dp"
+              android:background="#E7E8EA"
+              android:layout_marginHorizontal="15dp"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@id/bring_image" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/emailLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profileLayout">
+
+          <TextView
+              android:id="@+id/emailText"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:fontFamily="@font/roboto"
+              android:text="@string/userEmailProfile"
+              android:textSize="18sp"
+              android:textStyle="bold"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent" />
+
+          <androidx.constraintlayout.widget.ConstraintLayout
+              android:id="@+id/emailEditLayout"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="12dp"
+              android:background="@drawable/round_gray_6_rectangle"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@id/emailText">
+
+            <EditText
+                android:id="@+id/emailTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="5sy11@gmail.com"
+                android:hint="이메일을 입력해주세요."
+                android:textSize="18sp"
+                android:padding="2dp"
+                android:layout_marginStart="4dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--
+            <ImageButton
+                android:id="@+id/emaiEditButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_default"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+                -->
+
+          </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+          <View
+              android:layout_width="0dp"
+              android:layout_height="1dp"
+              android:layout_marginTop="10dp"
+              android:background="@color/editTextTint"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@id/emailEditLayout" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/registerNumLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/emailLayout">
+
+          <TextView
+              android:id="@+id/registerNumText"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:fontFamily="@font/roboto"
+              android:text="@string/registerNum"
+              android:textSize="18sp"
+              android:textStyle="bold"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent" />
+
+          <androidx.constraintlayout.widget.ConstraintLayout
+              android:id="@+id/registerLayout"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="12dp"
+              android:layout_marginEnd="10dp"
+              android:background="@drawable/round_gray_6_rectangle"
+              app:layout_constraintEnd_toStartOf="@+id/registerNumCheck"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@id/registerNumText">
+
+            <EditText
+                android:id="@+id/registerTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="@string/registerNumHint"
+                android:padding="2dp"
+                android:textSize="18sp"
+                android:layout_marginStart="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+          </androidx.constraintlayout.widget.ConstraintLayout>
+
+          <Button
+              android:id="@+id/registerNumCheck"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:backgroundTint="@color/gray30"
+              android:text="사업자 인증"
+              android:textColor="@color/black"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintTop_toBottomOf="@+id/registerNumText" />
+
+
+          <View
+              android:id="@+id/view"
+              android:layout_width="0dp"
+              android:layout_height="1dp"
+              android:layout_marginTop="10dp"
+              android:background="@color/editTextTint"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@id/registerLayout" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/addressLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/registerNumLayout">
+
+          <TextView
+              android:id="@+id/addressText"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="10dp"
+              android:text="@string/liveAddress"
+              android:textSize="18sp"
+              android:textStyle="bold"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent" />
+
+          <Button
+              android:id="@+id/addressFindBtn"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="11dp"
+              android:backgroundTint="@color/gray30"
+              android:text="@string/addressFind"
+              android:textColor="@color/black"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@id/addressText" />
+
+          <TextView
+              android:id="@+id/editaddressNum"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="18dp"
+              android:text="11111"
+              android:textSize="18dp"
+              app:layout_constraintBottom_toBottomOf="@+id/addressFindBtn"
+              app:layout_constraintStart_toEndOf="@id/addressFindBtn"
+              app:layout_constraintTop_toTopOf="@id/addressFindBtn" />
+
+          <TextView
+              android:id="@+id/editaddressText"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="10dp"
+              android:text="서울시 어디구 어디동"
+              android:textSize="18dp"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@id/addressFindBtn" />
+
+
+          <androidx.constraintlayout.widget.ConstraintLayout
+              android:id="@+id/locationLayout"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="8dp"
+              android:background="@drawable/round_gray_6_rectangle"
+              android:padding="2dp"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@id/editaddressText">
+
+            <TextView
+                android:id="@+id/detailLocationView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="무슨 가게"
+                android:textSize="18sp"
+                android:hint="상세 주소를 입력해주세요.(선택)"
+                android:layout_marginStart="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--
+            <ImageButton
+                android:id="@+id/locationEditButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_default"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+                -->
+
+          </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/endLine"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/editTextTint"
+            android:layout_marginHorizontal="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/addressLayout" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/endLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="20dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/endLine">
+
+          <TextView
+              android:id="@+id/logoutTextView"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/logout"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintEnd_toStartOf="@+id/withdrawalTextView"
+              app:layout_constraintHorizontal_bias="0.5"
+              app:layout_constraintStart_toStartOf="parent" />
+
+          <TextView
+              android:id="@+id/withdrawalTextView"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/withdrawal"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintHorizontal_bias="0.5"
+              app:layout_constraintStart_toEndOf="@+id/logoutTextView" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <Button
+          android:id="@+id/infoSaveBtn"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="15dp"
+          android:backgroundTint="@color/main"
+          android:fontFamily="@font/roboto"
+          android:paddingHorizontal="45dp"
+          android:text="정보 저장"
+          android:textSize="18sp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+  </FrameLayout>
+
+
+</layout>

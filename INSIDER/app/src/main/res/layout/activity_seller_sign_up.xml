@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.umc.insider.auth.signUp.SignUpViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="15dp"
+        tools:context=".auth.signUp.SignUpActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/logoLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/login_singup_logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <LinearLayout
+            android:id="@+id/inputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/addressLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/logoLayout">
+
+            <LinearLayout
+                android:id="@+id/userIdLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:text="@string/userIdSignUp"
+                    android:textColor="@color/loginSingUpTextColor" />
+
+                <EditText
+                    android:id="@+id/idEdit"
+                    stateCheck="@{vm.idState}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/editTextTint"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:maxLength="10"
+                    android:nextFocusDown="@id/nicknameEdit"
+                    android:text="@{vm.userId}"
+                    tools:drawableEnd="@drawable/baseline_check_24" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/userNicknameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:text="@string/userNicknameSignUp"
+                    android:textColor="@color/loginSingUpTextColor" />
+
+                <EditText
+                    android:id="@+id/nicknameEdit"
+                    stateCheck="@{vm.nicknameState}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/editTextTint"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:maxLength="10"
+                    android:nextFocusDown="@id/pwdEdit"
+                    android:text="@{vm.userNickname}"
+                    tools:drawableEnd="@drawable/baseline_check_24" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/userPasswordLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/userIdLayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/userPasswordSignUp"
+                    android:textColor="@color/loginSingUpTextColor" />
+
+                <EditText
+                    android:id="@+id/pwdEdit"
+                    securityState="@{vm.securityState}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/editTextTint"
+                    android:drawableEnd="@drawable/danger"
+                    android:inputType="textPassword"
+                    android:nextFocusDown="@id/pwdCheckEdit"
+                    android:text="@{vm.userPWD}" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/passwordCheckLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/userIdLayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/passwordCheckSignUp"
+                    android:textColor="@color/loginSingUpTextColor" />
+
+                <EditText
+                    android:id="@+id/pwdCheckEdit"
+                    stateCheck="@{vm.checkState}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/editTextTint"
+                    android:drawableEnd="@drawable/baseline_check_24"
+                    android:inputType="textPassword"
+                    android:nextFocusDown="@id/emailEdit"
+                    android:text="@{vm.checkPWD}" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/userEmailLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/userPasswordLayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/userEmailSignUp"
+                    android:textColor="@color/loginSingUpTextColor" />
+
+                <EditText
+                    android:id="@+id/emailEdit"
+                    stateCheck="@{vm.emailState}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/editTextTint"
+                    android:hint="@string/emailHint"
+                    android:inputType="textWebEmailAddress"
+                    android:text="@{vm.userEmail}"
+                    android:nextFocusDown="@id/registerNumEdit"
+                    tools:drawableEnd="@drawable/baseline_check_24" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/registerNumLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/userEmailLayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/registerNum"
+                    android:textColor="@color/loginSingUpTextColor" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/registerNumEdit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/editTextTint"
+                        android:hint="@string/registerNumHint"
+                        android:maxLength="10"
+                        android:imeOptions="actionDone"
+                        android:inputType="numberDecimal"
+                        android:text="@{vm.registerNum}"
+                        tools:drawableEnd="@drawable/baseline_check_24"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"/>
+                    
+                    <Button
+                        android:id="@+id/registerNumCheck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="사업자 인증"
+                        android:fontFamily="@font/roboto"
+                        android:backgroundTint="@color/gray30"
+                        android:textColor="@color/black"/>
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btnLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/addressLayout">
+
+            <Button
+                android:id="@+id/signUpBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/main"
+                android:fontFamily="@font/roboto"
+                android:text="@string/singUpComplete"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/addressLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/inputLayout"
+            app:layout_constraintBottom_toTopOf="@id/btnLayout">
+
+            <TextView
+                android:id="@+id/addressLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="주소"
+                android:textColor="@color/loginSingUpTextColor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/addressFindBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/gray30"
+                android:text="@string/addressFind"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/addressLabel" />
+
+            <TextView
+                android:id="@+id/addressNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="111111"
+                app:layout_constraintBottom_toBottomOf="@id/addressFindBtn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/addressFindBtn"
+                app:layout_constraintTop_toTopOf="@id/addressFindBtn" />
+
+            <TextView
+                android:id="@+id/addressText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                tools:text="서울시 어쩌구 저쩌구"
+                android:paddingStart="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/addressFindBtn" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

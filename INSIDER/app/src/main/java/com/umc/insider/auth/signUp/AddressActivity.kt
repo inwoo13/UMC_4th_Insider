@@ -1,8 +1,10 @@
 package com.umc.insider.auth.signUp
 
 import android.content.Intent
+import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.webkit.JavascriptInterface
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -21,19 +23,29 @@ class AddressActivity : AppCompatActivity() {
         binding = ActivityAddressBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.progressBar.visibility = View.VISIBLE
+
         binding.webView.settings.javaScriptEnabled = true
         binding.webView.addJavascriptInterface(BridgeInterface(), "Android")
 
         binding.webView.webViewClient = object: WebViewClient() {
+            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                super.onPageStarted(view, url, favicon)
+                // Show progress bar
+                binding.progressBar.visibility = View.VISIBLE
+            }
+
             override fun onPageFinished(view: WebView, url: String) {
                 // Android -> JavaScript
+                binding.logo.visibility = View.VISIBLE
                 binding.webView.loadUrl("javascript:sample2_execDaumPostcode();")
+                binding.progressBar.visibility = View.GONE
             }
         }
-
         // 최소 웹뷰 로드
         binding.webView.loadUrl("insider-392003.web.app")
     }
+
     private inner class BridgeInterface {
         @JavascriptInterface
         fun processDATA(data : String) {

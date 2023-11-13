@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/goods"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gray30_round_18_rectangle"
+        android:elevation="3dp">
+
+        <ImageView
+            android:id="@+id/goodsImg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/onion"
+            android:scaleType="fitXY"
+            android:layout_margin="1dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp"
+            android:paddingTop="10dp"
+            android:paddingVertical="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/goodsImg">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/itemDiscountRateLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <TextView
+                    android:id="@+id/itemDiscountRate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="20%"
+                    android:textColor="@color/red"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/itemTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:maxWidth="120dp"
+                android:maxLines="1"
+                android:text="드라큘라 잡는 양파ddddddddddddddddddddddddddddddddd"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/itemDiscountRateLayout"/>
+            <TextView
+                android:id="@+id/itemName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:maxWidth="80dp"
+                android:maxLines="1"
+                android:text="드라큘라 잡는 양파ddddddddddddddddddddddddddddddddd"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/itemWeightOrRest"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@+id/itemDiscountRateLayout"
+                app:layout_constraintTop_toBottomOf="@id/itemTitle" />
+
+            <TextView
+                android:id="@+id/itemWeightOrRest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:maxLines="1"
+                android:text="(2개)"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/itemName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/itemName"
+                app:layout_constraintTop_toBottomOf="@id/itemTitle" />
+
+            <TextView
+                android:id="@+id/itemPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2,000000000원"
+                android:maxLines="1"
+                android:textStyle="bold"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toStartOf="@+id/itemUnit"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@+id/itemDiscountRateLayout"
+                app:layout_constraintTop_toBottomOf="@id/itemName" />
+
+            <TextView
+                android:id="@+id/itemUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:text="(개당)"
+                android:textStyle="bold"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/itemPrice"
+                app:layout_constraintTop_toTopOf="@id/itemPrice"
+                tools:layout_editor_absoluteY="10dp" />
+
+            <TextView
+                android:id="@+id/salePrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/itemDiscountRateLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/itemPrice"
+                android:text="2000원"
+                android:textColor="@color/red"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/nestocopper422" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

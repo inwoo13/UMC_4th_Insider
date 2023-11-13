@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +23,7 @@ import com.umc.insider.databinding.FragmentSearchBinding
 import com.umc.insider.model.RankingItem
 import com.umc.insider.saveRecentSearch.SearchManager
 import com.umc.insider.utils.SearchesItemClickListener
+import com.umc.insider.utils.changeStatusBarColor
 
 class SearchFragment : Fragment(),SearchesItemClickListener {
 
@@ -42,6 +44,12 @@ class SearchFragment : Fragment(),SearchesItemClickListener {
             activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
             imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val statusBarColor = ContextCompat.getColor(requireContext(), R.color.statusBarColor)
+        activity?.changeStatusBarColor(statusBarColor)
     }
 
     override fun onCreateView(
@@ -144,7 +152,7 @@ class SearchFragment : Fragment(),SearchesItemClickListener {
         recentSearchesAdapter.submitList(searchManager.getSearchHistory())
     }
 
-    private fun searchKeyword(keyword : String){
+    fun searchKeyword(keyword : String){
         searchManager.addSearchWord(keyword)
         val searchResultFragment = SearchResultFragment().apply {
             arguments = Bundle().apply {

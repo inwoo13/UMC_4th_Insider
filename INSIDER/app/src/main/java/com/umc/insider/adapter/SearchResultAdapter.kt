@@ -1,14 +1,17 @@
 package com.umc.insider.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.umc.insider.OnNoteListener
 import com.umc.insider.databinding.SearchResultItemBinding
 import com.umc.insider.model.SearchItem
 
-class SearchResultAdapter : ListAdapter<SearchItem, SearchResultAdapter.SearchResultViewHolder>(DiffCallback){
+class SearchResultAdapter(private val onNoteListener: OnNoteListener) :
+    ListAdapter<SearchItem, SearchResultAdapter.SearchResultViewHolder>(DiffCallback){
 
 
     companion object{
@@ -25,11 +28,23 @@ class SearchResultAdapter : ListAdapter<SearchItem, SearchResultAdapter.SearchRe
     }
 
 
-    inner class SearchResultViewHolder(private val binding : SearchResultItemBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class SearchResultViewHolder(private val binding : SearchResultItemBinding) :
+        RecyclerView.ViewHolder(binding.root), View.OnClickListener{
+
+        init{
+            itemView.setOnClickListener(this)
+        }
         fun bind(searchItem: SearchItem){
             binding.itemName.text = searchItem.itemName
             binding.itemPrice.text = searchItem.itemPrice
-            binding.itemWeight.text = "("+searchItem.itemWeight+")"
+            binding.itemWeightOrRest.text = "("+searchItem.itemWeight+")"
+        }
+
+        override fun onClick(v: View?) {
+            val position = adapterPosition
+            if(position != RecyclerView.NO_POSITION){
+                //onNoteListener.onNotePurchaseDetail(position)
+            }
         }
     }
 
@@ -40,5 +55,9 @@ class SearchResultAdapter : ListAdapter<SearchItem, SearchResultAdapter.SearchRe
 
     override fun onBindViewHolder(holder: SearchResultViewHolder, position: Int) {
         holder.bind(getItem(position))
+    }
+
+    fun getItemAtPosition(position: Int): SearchItem {
+        return getItem(position)
     }
 }

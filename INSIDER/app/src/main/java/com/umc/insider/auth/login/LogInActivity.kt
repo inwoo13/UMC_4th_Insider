@@ -4,64 +4,85 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
-import com.facebook.AccessToken
-import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
-import com.facebook.GraphRequest
-import com.facebook.login.LoginManager
-import com.facebook.login.LoginResult
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.kakao.sdk.auth.AuthApiClient
+import com.kakao.sdk.auth.model.OAuthToken
+import com.kakao.sdk.common.KakaoSdk
+import com.kakao.sdk.common.model.ClientError
+import com.kakao.sdk.common.model.ClientErrorCause
+import com.kakao.sdk.common.util.Utility
+import com.kakao.sdk.user.UserApiClient
 import com.umc.insider.MainActivity
 import com.umc.insider.R
-import com.umc.insider.auth.signUp.SignUpActivity
+import com.umc.insider.auth.signUp.SellerBuyerActivity
+import com.umc.insider.auth.AutoLoginManager
+import com.umc.insider.auth.TokenManager
+import com.umc.insider.auth.UserManager
 import com.umc.insider.databinding.ActivityLogInBinding
+import com.umc.insider.retrofit.RetrofitInstance
+import com.umc.insider.retrofit.api.KakaoInterface
+import com.umc.insider.retrofit.api.UserInterface
+import com.umc.insider.retrofit.model.KakaoPostReq
+import com.umc.insider.retrofit.model.LoginPostReq
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class LogInActivity : AppCompatActivity() {
 
+
     private lateinit var binding : ActivityLogInBinding
+    private val userAPI = RetrofitInstance.getInstance().create(UserInterface::class.java)
+    private val kakaoAPI = RetrofitInstance.getInstance().create(KakaoInterface::class.java)
+
+    private lateinit var autoLoginManager: AutoLoginManager
 
     // Google
     lateinit var mGoogleSignClient : GoogleSignInClient
     lateinit var resultLauncher : ActivityResultLauncher<Intent>
 
-    // Facebook
-    private lateinit var callbackManager : CallbackManager
-    private lateinit var loginManager : LoginManager
 
     override fun onStart() {
         super.onStart()
 
         // Google
-        val account = GoogleSignIn.getLastSignedInAccount(this)
-        account?.let {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        } ?: {}
-        // Facebook
-        val accessToken = AccessToken.getCurrentAccessToken()
-        val isLoggedIn = accessToken != null && !accessToken.isExpired
-        if(isLoggedIn){
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }else { }
+//        val account = GoogleSignIn.getLastSignedInAccount(this)
+//        account?.let {
+////            startActivity(Intent(this, MainActivity::class.java))
+////            finish()
+//            goMainActivity()
+//        } ?: {}
+
+
+        if(!TokenManager.getToken(applicationContext).isNullOrBlank() &&
+            !UserManager.getUserIdx(applicationContext).isNullOrBlank() &&
+                AutoLoginManager(applicationContext).isAutoLogin()){
+            goMainActivity()
+        }
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_log_in)
+        //Log.d("login", "keyhash : ${Utility.getKeyHash(this)}")
 
+        autoLoginManager = AutoLoginManager(this)
+
+        binding.autoLoginSwitch.isChecked = autoLoginManager.isAutoLogin()
 
         initView()
         setResultSignUp()
@@ -72,53 +93,80 @@ class LogInActivity : AppCompatActivity() {
             .build()
 
         mGoogleSignClient = GoogleSignIn.getClient(this, gso)
+        val account = GoogleSignIn.getLastSignedInAccount(this)
 
-        // Facebook
-        callbackManager = CallbackManager.Factory.create()
-        loginManager = LoginManager.getInstance()
+        var keyHash = Utility.getKeyHash(this)
+        //Log.d("keyhash", keyHash)
 
     }
 
     private fun initView(){
         with(binding){
+
+            logIn.setOnClickListener {
+
+                if (idEdit.text.isNullOrBlank()) {
+                    Toast.makeText(this@LogInActivity, "아이디를 입력해주세요", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                if (pwdEdit.text.isNullOrBlank()) {
+                    Toast.makeText(this@LogInActivity, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                val id = idEdit.text.toString()
+
+                val pwd = pwdEdit.text.toString()
+                val loginPostReq = LoginPostReq(id,pwd)
+
+                lifecycleScope.launch {
+                    val response = withContext(Dispatchers.IO) {
+                        userAPI.logIn(loginPostReq)
+                    }
+                    if(response.isSuccessful){
+
+                        val baseResponse = response.body()
+
+                        if(baseResponse?.isSuccess == true){
+
+                            val loginPostRes = baseResponse.result
+                            TokenManager.saveToken(this@LogInActivity, loginPostRes?.jwt)
+                            UserManager.saveUserIdx(this@LogInActivity, loginPostRes?.id)
+                            UserManager.setUserSellerOrBuyer(this@LogInActivity, loginPostRes?.sellerOrBuyer)
+                            if (autoLoginSwitch.isChecked){
+                                autoLoginManager.setAutoLogin(true)
+                            }else{
+                                autoLoginManager.setAutoLogin(false)
+                            }
+
+                            goMainActivity()
+                        }else{
+                            // baseResponse가 실패한 경우의 처리
+                            //Log.d("loginerror",baseResponse!!.message)
+                        }
+
+                    }else{
+                        // 네트워크 에러 처리
+                    }
+                }
+            }
+
             singUp.setOnClickListener {
-                startActivity(Intent(this@LogInActivity, SignUpActivity::class.java))
+                startActivity(Intent(this@LogInActivity, SellerBuyerActivity::class.java))
             }
             googleBtn.setOnClickListener {
+                Toast.makeText(this@LogInActivity, "로그인은 되지만 미구현입니다.",Toast.LENGTH_SHORT).show()
                 signIn()
             }
-            facebookBtn.setOnClickListener {
-                loginManager.logInWithReadPermissions(this@LogInActivity, listOf("public_profile", "email"))
-                loginManager.registerCallback(callbackManager, object : FacebookCallback<LoginResult?>{
-                    override fun onSuccess(loginResult: LoginResult?) {
-                        val graphRequest = GraphRequest.newMeRequest(loginResult?.accessToken) { f_object, response ->
-                            // {token: loginResult.accessToken / userObject: f_object}
-                            //Toast.makeText(this@LogInActivity, "onSuccess: token: ${loginResult?.accessToken} \n\n userObject: ${f_object}}", Toast.LENGTH_LONG).show()
-                            startActivity(Intent(this@LogInActivity, MainActivity::class.java))
-                            finish()
-                        }
-                        val parameters = Bundle()
-                        parameters.putString("fields", "id,name,email,gender,birthday")
-                        graphRequest.parameters = parameters
-                        graphRequest.executeAsync()
-                    }
 
-                    override fun onCancel() {
-                        //Toast.makeText(this@LogInActivity, "로그인 취소", Toast.LENGTH_SHORT).show()
-                    }
+            kakaoBtn.setOnClickListener {
+                //Toast.makeText(this@LogInActivity, "누름", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this@LogInActivity, KakaoWebViewActivity::class.java)
+                resultLauncher.launch(intent)
 
-                    override fun onError(error: FacebookException?) {
-                        //Toast.makeText(this@LogInActivity, "로그인 에러", Toast.LENGTH_SHORT).show()
-                    }
-
-                })
             }
         }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        callbackManager.onActivityResult(requestCode, resultCode, data)
     }
 
     private fun setResultSignUp() {
@@ -128,18 +176,71 @@ class LogInActivity : AppCompatActivity() {
                 val task : Task<GoogleSignInAccount> =
                     GoogleSignIn.getSignedInAccountFromIntent(result.data)
                 handleSignInResult(task)
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
+                //startActivity(Intent(this, MainActivity::class.java))
+                //finish()
+                Toast.makeText(this@LogInActivity, "로그인 성공! - 연결 x.",Toast.LENGTH_SHORT).show()
             }else{
-                Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
             }
+            if ( result.resultCode == 101){
+                val code = result.data?.getStringExtra("code")
+                if (code != null) {
+                    //Toast.makeText(this@LogInActivity, code,Toast.LENGTH_SHORT).show()
+                    lifecycleScope.launch {
+
+                        try {
+                            val response = withContext(Dispatchers.IO){
+                                kakaoAPI.kakaoCallback(code)
+                            }
+                            if (response.isSuccess){
+                                Log.d("카카오", response.result.toString())
+                                val result = response.result
+                                val id = result!!.userId
+                                val kakaoPostReq = KakaoPostReq(id)
+
+                                lifecycleScope.launch {
+                                    val response = withContext(Dispatchers.IO) {
+                                        kakaoAPI.logIn(kakaoPostReq)
+                                    }
+                                    if(response.isSuccess){
+
+                                        val baseResponse = response.result
+
+                                        TokenManager.saveToken(this@LogInActivity, "empty")
+                                        UserManager.saveUserIdx(this@LogInActivity, baseResponse?.id)
+                                        UserManager.setUserSellerOrBuyer(this@LogInActivity, baseResponse?.sellerOrBuyer)
+                                        //Toast.makeText(this@LogInActivity, loginPostRes?.id.toString(),Toast.LENGTH_SHORT).show()
+                                        if (binding.autoLoginSwitch.isChecked){
+                                            autoLoginManager.setAutoLogin(true)
+                                        }else{
+                                            autoLoginManager.setAutoLogin(false)
+                                        }
+                                        goMainActivity()
+                                    }else{
+                                        // 네트워크 에러 처리
+                                    }
+                                }
+                            }else{
+                                Log.d("카카오", "다른 에러")
+                            }
+                        }catch (e : Exception){
+                            Log.d("카카오", "네트워크 에러")
+                        }
+                    }
+                } else {
+                    // code 값이 없는 경우의 처리
+                    Toast.makeText(this@LogInActivity, "code가 없습니다.",Toast.LENGTH_SHORT).show()
+                }
+            }
+
         }
     }
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val account = completedTask.getResult(ApiException::class.java)
-//            val email = account?.email.toString()
+            val email = account?.email.toString()
+//            Toast.makeText(this, email, Toast.LENGTH_SHORT).show()
 //            val familyName = account?.familyName.toString()
 //            val givenName = account?.givenName.toString()
 //            val displayName = account?.displayName.toString()
@@ -152,6 +253,11 @@ class LogInActivity : AppCompatActivity() {
     private fun signIn() {
         val signInIntent : Intent = mGoogleSignClient.signInIntent
         resultLauncher.launch(signInIntent)
+    }
+
+    private fun goMainActivity(){
+        startActivity(Intent(this@LogInActivity, MainActivity::class.java))
+        finish()
     }
 
 }

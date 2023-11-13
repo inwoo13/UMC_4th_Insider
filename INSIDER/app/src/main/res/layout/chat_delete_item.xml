@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/profileImgLayout"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/gray30_round_18_rectangle"
+        android:elevation="3dp"
+        android:gravity="center"
+        android:layout_marginStart="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/profileImg"
+            android:layout_width="33dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/mypage" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/interlocutor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="11dp"
+        android:fontFamily="@font/roboto"
+        android:text="###"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/profileImgLayout"
+        app:layout_constraintTop_toTopOf="@id/profileImgLayout" />
+
+    <TextView
+        android:id="@+id/recentMessageTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:fontFamily="@font/roboto"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="안녕하세요. 교환 가능 하실까요?"
+        android:layout_marginEnd="5dp"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/checkbox"
+        app:layout_constraintBottom_toBottomOf="@id/profileImgLayout"
+        app:layout_constraintStart_toStartOf="@id/interlocutor" />
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:button="@android:color/transparent"
+        android:background="@drawable/checkbox"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profileImgLayout"
+        android:background="@color/editTextTint"
+        android:layout_marginTop="10dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

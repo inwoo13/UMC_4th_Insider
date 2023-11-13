@@ -32,7 +32,7 @@ class LoadingActivity : AppCompatActivity() {
                 startActivity(Intent(this, LogInActivity::class.java))
                 finish()
             }
-        }, 3000)
+        }, 1000)
     }
 
     private fun isNetworkConnected(context: Context): Boolean {

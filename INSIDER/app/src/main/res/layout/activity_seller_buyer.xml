@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main">
+
+        <ImageView
+            android:id="@+id/logoIV"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="45dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:srcCompat="@drawable/main_logo"/>
+        
+        <TextView
+            android:id="@+id/howTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="나의 인싸 유형은?"
+            android:textColor="@color/white"
+            android:textSize="28dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/roboto"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/logoIV"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/sellerLayout"
+            android:layout_width="0dp"
+            android:layout_height="184dp"
+            android:background="@drawable/white_round16_rectangle"
+            android:elevation="8dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginHorizontal="15dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/howTV">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingBottom="11dp"
+                android:gravity="bottom|center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent">
+
+                <TextView
+                    android:id="@+id/tv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="팔아유"
+                    android:textSize="28dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/buyerLayout"
+        android:layout_width="0dp"
+        android:layout_height="184dp"
+        android:background="@drawable/white_round16_rectangle"
+        android:elevation="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sellerLayout">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="11dp"
+            android:gravity="bottom|center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <TextView
+                android:id="@+id/tv3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="사유"
+                android:textSize="28dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
